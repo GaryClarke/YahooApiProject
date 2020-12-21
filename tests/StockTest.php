@@ -11,13 +11,22 @@ class StockTest extends KernelTestCase
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $kernel = self::bootKernel();
 
         DatabasePrimer::prime($kernel);
 
         $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
+    }
+
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->entityManager->close();
+        $this->entityManager = null;
     }
 
 

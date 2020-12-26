@@ -46,21 +46,27 @@ class RefreshStockProfileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // 1. Ping Yahoo API and grab the response (a stock profile)
+        // 1. Ping Yahoo API and grab the response (a stock profile) ['statusCode' => $statusCode, 'content' => $someJsonContent]
         $stockProfile = $this->yahooFinanceApiClient->fetchStockProfile($input->getArgument('symbol'), $input->getArgument('region'));
 
+        if ($stockProfile['statusCode'] !== 200) {
+
+            // Handle non 200 status code responses
+        }
 
         // 2b. Use the stock profile to create a record if it doesn't exist
-        $stock = new Stock();
-        $stock->setCurrency($stockProfile->currency);
-        $stock->setExchangeName($stockProfile->exchangeName);
-        $stock->setSymbol($stockProfile->symbol);
-        $stock->setShortName($stockProfile->shortName);
-        $stock->setRegion($stockProfile->region);
-        $stock->setPreviousClose($stockProfile->previousClose);
-        $stock->setPrice($stockProfile->price);
-        $priceChange = $stockProfile->price - $stockProfile->previousClose;
-        $stock->setPriceChange($priceChange);
+        $stock = $this->serializer->deserialize($stockProfile['content'], Stock::class, 'json');
+
+//        $stock = new Stock();
+//        $stock->setCurrency($stockProfile->currency);
+//        $stock->setExchangeName($stockProfile->exchangeName);
+//        $stock->setSymbol($stockProfile->symbol);
+//        $stock->setShortName($stockProfile->shortName);
+//        $stock->setRegion($stockProfile->region);
+//        $stock->setPreviousClose($stockProfile->previousClose);
+//        $stock->setPrice($stockProfile->price);
+//        $priceChange = $stockProfile->price - $stockProfile->previousClose;
+//        $stock->setPriceChange($priceChange);
 
         $this->entityManager->persist($stock);
 

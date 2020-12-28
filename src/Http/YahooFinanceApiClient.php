@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class YahooFinanceApiClient implements FinanceApiClientInterface
@@ -21,7 +22,7 @@ class YahooFinanceApiClient implements FinanceApiClientInterface
         $this->rapidApiKey = $rapidApiKey;
     }
 
-    public function fetchStockProfile($symbol, $region): array
+    public function fetchStockProfile($symbol, $region): JsonResponse
     {
         $response = $this->httpClient->request('GET', self::URL, [
             'query'   => [
@@ -53,10 +54,7 @@ class YahooFinanceApiClient implements FinanceApiClientInterface
             'priceChange'   => $stockProfile->regularMarketPrice->raw - $stockProfile->regularMarketPreviousClose->raw
         ];
 
-        return [
-            'statusCode' => 200,
-            'content'    => json_encode($stockProfileAsArray)
-        ];
+        return new JsonResponse($stockProfileAsArray, 200);
     }
 }
 

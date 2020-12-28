@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 class RefreshStockProfileCommandTest extends DatabaseDependantTestCase
 {
     /** @test */
-    public function the_refresh_stock_profile_command_bbehaves_correctly_when_a_stock_record_does_not_exist()
+    public function the_refresh_stock_profile_command_behaves_correctly_when_a_stock_record_does_not_exist()
     {
         // SETUP //
         $application = new Application(self::$kernel);
@@ -45,20 +45,4 @@ class RefreshStockProfileCommandTest extends DatabaseDependantTestCase
         $this->assertGreaterThan(50, $stock->getPreviousClose());
         $this->assertGreaterThan(50, $stock->getPrice());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

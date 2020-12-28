@@ -19,9 +19,10 @@ class YahooFinanceApiClientTest extends DatabaseDependantTestCase
         // Do something
         $response = $yahooFinanceApiClient->fetchStockProfile('AMZN', 'US'); // symbol, region
 
-        $stockProfile = json_decode($response['content']);
+        $stockProfile = json_decode($response->getContent());
 
         // Make assertions
+        $this->assertEquals(200, $response->getStatusCode());
         $this->assertSame('AMZN', $stockProfile->symbol);
         $this->assertSame('Amazon.com, Inc.', $stockProfile->shortName);
         $this->assertSame('US', $stockProfile->region);

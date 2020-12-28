@@ -4,9 +4,8 @@ namespace App\Http;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class YahooFinanceApiClient
+class YahooFinanceApiClient implements FinanceApiClientInterface
 {
-
     /**
      * @var HttpClientInterface
      */

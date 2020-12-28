@@ -34,3 +34,5 @@ services:
     yahoo-finance-api-client:
         class: App\Http\YahooFinanceApiClient
         public: true
+    App\Http\FinanceApiClientInterface:
+        class: App\Http\YahooFinanceApiClient

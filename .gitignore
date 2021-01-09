@@ -240,3 +240,6 @@ modules.xml
 /web/js/
 
 # End of https://www.toptal.com/developers/gitignore/api/symfony,phpstorm,phpstorm+all
+
+/postgres/*
+/postgres/*~

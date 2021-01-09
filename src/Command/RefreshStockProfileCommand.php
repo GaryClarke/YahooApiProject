@@ -59,7 +59,7 @@ class RefreshStockProfileCommand extends Command
 
         if ($stockProfile->getStatusCode() !== 200) {
 
-            // Handle non 200 status code responses
+            return Command::FAILURE;
         }
 
         $stock = $this->serializer->deserialize($stockProfile->getContent(), Stock::class, 'json');

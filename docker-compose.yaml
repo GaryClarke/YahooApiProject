@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    database:
+        image: postgres:13-alpine
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        restart: always
+        environment:
+            POSTGRES_USER: main
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: finance_app
+        ports: [5432]

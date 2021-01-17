@@ -109,7 +109,8 @@ class RefreshStockProfileCommandTest extends DatabaseDependantTestCase
 
         $this->assertEquals(0, $commandStatus);
 
-        $this->assertEquals(0, $stockRecordCount);
+        // Check no duplicates i.e. 1 record instead of 2
+        $this->assertEquals(1, $stockRecordCount);
     }
 
 

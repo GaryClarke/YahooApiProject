@@ -71,8 +71,6 @@ class RefreshStockProfileCommand extends Command
 
         $this->entityManager->flush();
 
-        dd($output);
-
         $output->writeln($stock->getShortName() . ' has been saved / updated.');
 
         return Command::SUCCESS;

@@ -35,7 +35,7 @@ class YahooFinanceApiClient implements FinanceApiClientInterface
             ]
         ]);
 
-        // @todo handle non 200 responses
+
         if ($response->getStatusCode() !== 200) {
 
             return new JsonResponse('Finance API Client Error ', 400);
